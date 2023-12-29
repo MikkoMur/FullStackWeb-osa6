@@ -3,8 +3,12 @@ import { voteId } from '../reducers/anecdoteReducer'
 
 const AnecdoteList = () => {
 
-  const anecdotes = useSelector(state => state)
+  const unFilteredAnecdotes = useSelector(state => state.anecdotes)
+  const filterStr = useSelector(state => state.filter)
+  console.log(filterStr)
   const dispatch = useDispatch()
+
+  const anecdotes = unFilteredAnecdotes.filter(anecdote => anecdote.content.includes(filterStr))
 
   const vote = (id) => {
     console.log('vote', id)
